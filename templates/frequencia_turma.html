@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Frequência por turma</title>
+    <meta name="viewport" content="width=device-width, scale=1.0"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        ::selection {
+            color: #ffffff;
+            background-color: #c3ecec;
+        }
+
+        .container {
+            margin-left: 20px;
+        }
+
+        .navbar-default {
+            background-color: #5cb85c;
+            border-color: #54b554;
+            border-radius: 0;
+        }
+
+        .navbar-default .navbar-brand,
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus {
+            color: #FFFFFF !important;
+        }
+
+        .navbar-default .navbar-nav > li > a {
+            color: #FFFFFF !important;
+        }
+
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+            background-color: #449d44;
+        }
+
+        .navbar-default .navbar-nav > .active > a,
+        .navbar-default .navbar-nav > .active > a:hover,
+        .navbar-default .navbar-nav > .active > a:focus {
+            color: #FFFFFF !important;
+            background-color: #449d44;
+        }
+
+        .navbar-default .navbar-text {
+            color: #FFFFFF !important;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: #54b554;
+        }
+
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+            background-color: #449d44;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #FFFFFF !important;
+        }
+    </style>
+    <link href="https://pythonprogramming.net/static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid"> <!-- Brand and toggle get grouped for better mobile display -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'home' %}">Início</a></li>
+                <li><a href="{% url 'frequencia' %}">Registrar frequência</a></li>
+                <li><a href="{% url 'frequencia_por_aluno' %}">Frequência por aluno</a></li>
+                <li><a href="{% url 'frequencia_por_turma' %}">Frequência por turma</a></li>
+                <li><a href="{% url 'turmas' %}">Turmas</a></li>
+                <li><a href="{% url 'logout' %}">Sair</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+{% load index %}
+<div class="container">
+    <table class="table table-bordered">
+        <tr>
+            <td>Turma</td>
+            <td>Matrícula</td>
+            <td>Nome</td>
+            <td>Faltas</td>
+        </tr>
+        {% for aluno in alunos_tsi %}
+            <tr>
+                <td>TSI</td>
+                <td>{{ aluno.matricula }}</td>
+                <td>{{ aluno.nome }}</td>
+                <td>{{ faltas_tsi|index:forloop.counter0 }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <hr/>
+
+    <table class="table table-bordered">
+        <tr>
+            <td>Turma</td>
+            <td>Matrícula</td>
+            <td>Nome</td>
+            <td>Faltas</td>
+        </tr>
+        {% for aluno in alunos_meca %}
+            <tr>
+                <td>Mecatrônica</td>
+                <td>{{ aluno.matricula }}</td>
+                <td>{{ aluno.nome }}</td>
+                <td>{{ faltas_meca|index:forloop.counter0 }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <hr/>
+
+    <table class="table table-bordered">
+        <tr>
+            <td>Turma</td>
+            <td>Matrícula</td>
+            <td>Nome</td>
+            <td>Faltas</td>
+        </tr>
+        {% for aluno in alunos_info %}
+            <tr>
+                <td>Informática</td>
+                <td>{{ aluno.matricula }}</td>
+                <td>{{ aluno.nome }}</td>
+                <td>{{ faltas_meca|index:forloop.counter0 }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+</body>
+</html>

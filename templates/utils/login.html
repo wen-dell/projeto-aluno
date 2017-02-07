@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/1a06f43d28.js"></script>
+    <link href="https://pythonprogramming.net/static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <style>
+        body {
+            overflow-y: hidden;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        ::selection {
+            color: #ffffff;
+            background-color: #c3ecec;
+        }
+
+        .form-control, label, h2, input[type="submit"], a {
+            width: 300px;
+            margin-left: 40px;
+        }
+
+        .jumbotron {
+            width: 500px;
+            margin: 150px auto;
+            background-color: #ffffff;
+            border: 1px solid #eaeaea;
+        }
+
+        .container-botao {
+            position: fixed;
+            float: right;
+            width: 200px;
+            height: 250px;
+            top: 40%;
+            right: 0;
+        }
+
+        .botao-flutuante {
+            width: 120px;
+            height: 80px;
+            border: 2px solid #6a6d68;
+            border-radius: 6px 0 0 6px;
+            margin-top: 10px;
+            float: right;
+            transition: all ease-out 0.5s;
+            -moz-transition: all ease-out 0.5s;
+            -o-transition: all ease-out 0.5s;
+            -webkit-transition: all ease-out 0.5s;
+            background-color: #6a6d68;
+            font-weight: bold;
+        }
+
+        .botao-flutuante:hover {
+            background-color: #4a4c48;
+            width: 150px;
+            transition: all ease-out 0.5s;
+            -moz-transition: all ease-out 0.5s;
+            -o-transition: all ease-out 0.5s;
+            -webkit-transition: all ease-out 0.5s;
+        }
+
+        .botao-flutuante a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: #FFFFFF;
+            line-height: 75px;
+            padding-left: 10px;
+        }
+
+        .botao-flutuante a:hover {
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+
+        .fa-github-alt {
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h2>Login</h2>
+        {% load widget_tweaks %}
+        <form action="{% url "login" %}" method="post" role="form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Usuário:</label>
+                {{ form.username | add_class:"form-control" | add_error_class:"error-border" }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}">Senha: </label>
+                {{ form.password | add_class:"form-control" }}
+            </div>
+            <input type="hidden" name="next" value="{{ next }}"/>
+            <input type="submit" class="btn btn-success" value="Login"/>
+            <a href="{% url 'admin:index' %}" class="btn btn-link">Cadastrar Usuário</a>
+        </form>
+    </div>
+
+    <div class="container-botao">
+        <div class="botao-flutuante">
+            <a href="https://github.com/wen-dell" title="GitHub" target="_blank"><i class="fa fa-github-alt" aria-hidden="true"></i></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
